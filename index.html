@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>try{document.documentElement.dataset.theme=localStorage.theme||"dark"}catch{}</script><meta name="theme-color" content="#0A0D08"><title>AppNest - Discover. Download. Enjoy.</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--lime:#C6FF3D;--dk:#0A0D08;--bg:#0A0D08;--ink:#F2F6EA;--panel:#12170Fb3;--panel2:#1B2216;--line:#2A3424;--mut:#9AA88D;--acc:#C6FF3D;--glass:#10150Dcc;--grid:#ffffff09;--blue:var(--acc);--vio:var(--acc);--mist:var(--panel2);--g:linear-gradient(135deg,#D8FF5A,#9BEA00)}
+html[data-theme=light]{--bg:#F3F6EA;--ink:#10150C;--panel:#ffffffcc;--panel2:#EAF0DA;--line:#D6DFC2;--mut:#5A684B;--acc:#3F6B00;--glass:#ffffffe0;--grid:#10150C0b}
+*{box-sizing:border-box;margin:0}
+html{background:var(--bg);color-scheme:dark}html[data-theme=light]{color-scheme:light}
+body{font:15px/1.5 Inter,system-ui,sans-serif;color:var(--ink);padding-bottom:120px;min-height:100vh}
+body:before,body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none}
+body:before{background:radial-gradient(620px 420px at 88% -6%,#C6FF3D2e,transparent 62%),radial-gradient(520px 520px at -12% 42%,#3DFFB024,transparent 62%),radial-gradient(520px 420px at 62% 112%,#7A5CFF1f,transparent 62%)}
+body:after{background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse at 50% 0,#000 15%,transparent 72%);mask-image:radial-gradient(ellipse at 50% 0,#000 15%,transparent 72%)}
+::selection{background:var(--lime);color:var(--dk)}
+a{color:inherit;text-decoration:none}
+code{background:var(--panel2);color:var(--acc);padding:1px 6px;border-radius:6px;font-size:13px}
+#main{max-width:1040px;margin:auto;padding:14px 16px}
+.pad{padding:8px 0}
+h1,h2,.logo,.stats b,.strip b,.rk .n{font-family:'Space Grotesk',Inter,sans-serif}
+h1{font-size:clamp(28px,6vw,42px);font-weight:700;letter-spacing:-.03em;line-height:1.05}
+h2{font-size:20px;font-weight:700;margin:26px 0 12px;display:flex;align-items:center;gap:10px;letter-spacing:-.01em}
+h2:before{content:"";width:8px;height:20px;border-radius:4px;background:var(--lime);flex:none}
+#top{position:sticky;top:0;z-index:4;display:flex;align-items:center;gap:10px;padding:10px 16px;padding-top:calc(10px + env(safe-area-inset-top,0px));-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);background:var(--glass);border-bottom:1px solid var(--line)}
+#top.hide{display:none}#top .lg{display:flex;align-items:center;gap:8px;font:700 19px 'Space Grotesk',Inter;letter-spacing:-.02em}#top .sp{flex:1}
+#top a.av{width:36px;height:36px;border-radius:50%;background:var(--lime);color:var(--dk);display:grid;place-items:center;font-weight:800}
+.ic-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--panel2);color:var(--ink);cursor:pointer;font-size:16px}
+.greet{margin:6px 0 14px}
+.sbar{display:flex;align-items:center;gap:10px;background:var(--panel);border:1.5px solid var(--line);border-radius:999px;padding:0 20px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:.2s}
+.sbar:focus-within{border-color:var(--lime);box-shadow:0 0 0 4px #C6FF3D22}
+.sbar input,.sbar input:focus{border:0;background:none;margin:0;padding:15px 0;outline:none;box-shadow:none}.sbar span{color:var(--acc);font-size:20px}
+input,select,textarea{width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:14px;font:inherit;background:var(--panel);color:var(--ink);margin:4px 0}
+input::placeholder,textarea::placeholder{color:var(--mut)}input[type=file]{padding:10px}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--lime);outline-offset:1px}
+textarea{min-height:90px}
+.btn{display:inline-flex;gap:6px;align-items:center;justify-content:center;border:0;border-radius:999px;padding:12px 20px;font:700 14px Inter;cursor:pointer;background:var(--lime);color:var(--dk);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 22px #C6FF3D55}.btn:disabled{opacity:.5}
+.btn.o{background:var(--panel2);color:var(--acc);border:1px solid var(--line)}.btn.r{background:#3a1520;color:#FF8A9E}.btn.s{padding:7px 13px;font-size:12px}
+.car{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:28px;scrollbar-width:none;margin:14px 0 8px}.car::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:start;position:relative;min-height:230px;overflow:hidden;display:flex;align-items:flex-end;padding:22px;color:#fff;background:#111}
+.slide .bg{position:absolute;inset:-30px;width:calc(100% + 60px);height:calc(100% + 60px);object-fit:cover;filter:blur(30px) saturate(1.5) brightness(.6)}
+.slide:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#000b,transparent 75%)}
+.slide .ic{position:absolute;right:22px;top:22px;width:92px;height:92px;border-radius:26px;object-fit:cover;box-shadow:0 12px 30px #0008;z-index:1}
+.slide .ov{position:relative;z-index:1;max-width:80%}.slide .ov p{opacity:.85;font-size:13px;margin-bottom:12px}
+.tag{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--lime);color:var(--dk);padding:3px 10px;border-radius:99px}
+.dots{display:flex;gap:6px;justify-content:center;margin-bottom:10px}.dots i{width:7px;height:7px;border-radius:99px;background:var(--line);transition:.3s}.dots i.on{width:22px;background:var(--lime)}
+.strip{display:flex;gap:10px;margin:8px 0}.strip span{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:10px 14px;color:var(--mut);font-size:12px}
+.strip b{display:block;font-size:21px;color:var(--ink);letter-spacing:-.02em}
+.charts{display:grid;grid-template-columns:1fr;gap:10px}
+.rk{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--panel);border:1px solid var(--line);border-radius:20px;transition:.2s;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.rk:hover{border-color:var(--lime);transform:translateX(3px)}.rk .n{font-size:20px;font-weight:700;width:26px;text-align:center;color:var(--acc)}
+.rk img{width:52px;height:52px;border-radius:15px;object-fit:cover}.rk .g{flex:1;min-width:0}.rk b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rk .get{background:var(--lime);color:var(--dk);font-weight:700;font-size:12px;padding:7px 16px;border-radius:99px}
+.hrow{display:flex;gap:12px;overflow-x:auto;padding:4px 2px 12px;scroll-snap-type:x mandatory}.hrow .app{flex:0 0 150px;scroll-snap-align:start}
+.app{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:10px;transition:transform .2s,border-color .2s,box-shadow .2s;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.app:hover{transform:translateY(-5px);border-color:var(--lime);box-shadow:0 14px 34px #C6FF3D26}
+.app .ph{position:relative;aspect-ratio:1}.app .ph img{width:100%;height:100%;border-radius:18px;object-fit:cover;background:var(--panel2)}
+.app .ph em{position:absolute;left:8px;top:8px;background:var(--lime);color:var(--dk);font:800 10px Inter;font-style:normal;padding:2px 8px;border-radius:99px}
+.app b{display:block;margin-top:9px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app small,.mut{color:var(--mut);font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 0}
+.chip{white-space:nowrap;padding:8px 16px;border-radius:99px;background:var(--panel2);color:var(--ink);font-weight:600;font-size:13px;cursor:pointer;border:1px solid var(--line);transition:.15s}
+.chip.on{background:var(--lime);color:var(--dk);border-color:var(--lime)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:16px;margin:10px 0;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.hd{display:flex;gap:16px;align-items:center}.hd img{width:96px;height:96px;border-radius:26px;object-fit:cover;box-shadow:0 10px 30px #0006}
+.shots{display:flex;gap:10px;overflow-x:auto;margin:14px 0}.shots img{height:260px;border-radius:18px;border:1px solid var(--line)}
+.it[hidden]{display:none}.it{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}.it img{width:46px;height:46px;border-radius:13px;object-fit:cover}.it .g{flex:1;min-width:140px}
+.badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--panel2);color:var(--acc);border:1px solid var(--line)}
+.badge.published{background:#1d3a0f;color:#B6F500;border-color:#1d3a0f}.badge.rejected,.badge.banned{background:#3a1520;color:#FF8A9E;border-color:#3a1520}.badge.pending{background:#3a2f10;color:#FFD166;border-color:#3a2f10}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}.stats div{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:14px;color:var(--mut);font-size:12px}
+.stats b{font-size:24px;display:block;color:var(--ink);letter-spacing:-.02em}.stats div:first-child{background:var(--lime);border-color:var(--lime);color:#2c3a14}.stats div:first-child b{color:var(--dk)}
+.bar{display:grid;grid-template-columns:110px 1fr 46px;gap:10px;align-items:center;margin:9px 0;font-size:13px}.bar div{height:10px;background:var(--panel2);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--g);border-radius:99px}.bar span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bar b{text-align:right}
+.tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:10px}
+progress{width:100%;height:8px;accent-color:var(--lime)}
+.sk{border-radius:20px;background:linear-gradient(90deg,var(--panel2),var(--line),var(--panel2));background-size:200% 100%;animation:sh 1.2s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+nav{position:fixed;z-index:6;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:4px;padding:7px;background:var(--glass);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:28px;box-shadow:0 14px 40px #0007;max-width:calc(100vw - 16px);overflow-x:auto}
+nav a{position:relative;text-align:center;font-size:10px;font-weight:600;color:var(--mut);padding:8px 10px;border-radius:21px;min-width:54px;transition:.2s}
+nav a i{display:block;font-style:normal;font-size:19px;line-height:1.1}
+nav a.on{background:var(--lime);color:var(--dk)}nav .lg{display:none}nav.hide{display:none}
+nav a .dot{position:absolute;top:2px;right:4px;min-width:16px;height:16px;border-radius:99px;background:#FF4D6D;color:#fff;font-size:10px;line-height:16px;font-weight:700;padding:0 4px;text-align:center}
+#toast{position:fixed;left:50%;bottom:100px;transform:translate(-50%,20px);background:var(--lime);color:var(--dk);font-weight:600;padding:11px 20px;border-radius:99px;opacity:0;pointer-events:none;transition:.25s;z-index:9;max-width:90vw}#toast.on{opacity:1;transform:translate(-50%,0)}
+.auth{max-width:400px;margin:6vh auto;background:var(--panel);border:1px solid var(--line);border-radius:30px;padding:26px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:700;margin-bottom:14px}
+pre{overflow:auto;background:#060804;border:1px solid var(--line);color:#DDF7A8;padding:14px;border-radius:14px;font-size:12px;max-height:340px}
+.fbh{position:relative;overflow:hidden;background-color:var(--lime);background-image:radial-gradient(#0A0D0826 1.6px,transparent 1.7px);background-size:16px 16px;color:var(--dk);border-radius:30px;padding:28px 22px;margin-bottom:14px}
+.fbh p{margin-top:8px;max-width:420px;color:#1d2a0a;font-weight:500}.fbh h1{max-width:14ch}
+.fbc{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:18px;animation:up .4s both}
+.types{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
+.starrow{display:flex;gap:2px;margin:2px 0 10px}.star{border:0;background:none;font-size:30px;line-height:1;color:var(--line);cursor:pointer;padding:0 2px;transition:transform .15s,color .15s}.star.on{color:var(--lime)}.star:hover{transform:scale(1.2)}
+.thread{border:1px solid var(--line);border-radius:24px;padding:16px;margin:12px 0;background:var(--panel);animation:up .4s both}
+.tmeta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}.tmeta small{margin-left:auto}
+.bub{width:fit-content;max-width:88%;padding:11px 15px;border-radius:20px;margin:6px 0;white-space:pre-wrap;word-break:break-word}
+.bub.me{background:var(--lime);color:var(--dk);margin-left:auto;border-bottom-right-radius:6px;font-weight:500}
+.bub.tm{background:var(--panel2);border:1px solid var(--line);border-bottom-left-radius:6px}
+.who{display:flex;align-items:center;gap:6px;font-weight:700;font-size:12px;color:var(--acc);margin-bottom:4px}.who svg{width:20px;height:20px}.who small{margin-left:14px;font-weight:400;color:var(--mut)}
+.pill{font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px}.pill.open{background:#3a2f10;color:#FFD166}.pill.replied{background:#1d3a0f;color:#B6F500}.pill.new{background:var(--lime);color:var(--dk);animation:pulse 1.6s infinite}
+.wait{font-size:12px;color:var(--mut);margin:4px 0 0 4px}
+@keyframes up{from{opacity:0;transform:translateY(10px)}}@keyframes pulse{50%{opacity:.6}}
+@media(min-width:760px){.charts{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){body{padding-bottom:50px}nav{bottom:auto;top:9px}nav a{font-size:13px;padding:9px 16px;min-width:0;display:flex;align-items:center;gap:7px}nav a i{display:inline;font-size:16px}nav a .dot{position:static}#main{padding-top:26px}.slide{min-height:290px;padding:34px}.slide .ic{width:130px;height:130px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head>
+<body>
+<header id="top" class="hide"></header><nav id="nav" class="hide"></nav><main id="main"></main><div id="toast"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#D8FF5A"/><stop offset="1" stop-color="#9BEA00"/></linearGradient></defs></svg>
+
+<!-- Backend files (shown on the #/setup page with copy buttons) -->
+<script type="text/plain" id="t-db">{"rules":{
+".read":false,".write":false,
+"meta":{"superAdmin":{".read":"data.val()==auth.uid",".write":"auth!=null&&!data.exists()&&newData.val()==auth.uid"}},
+"users":{".read":"root.child('users/'+auth.uid+'/role').val()=='admin'","$uid":{".read":"auth.uid==$uid",".write":"auth.uid==$uid&&!data.exists()",
+ ".validate":"data.exists()||(newData.hasChildren(['name','role','status'])&&newData.child('status').val()=='active'&&newData.child('role').val()==(root.child('meta/superAdmin').val()==$uid?'admin':'user'))",
+ "name":{".write":"auth.uid==$uid",".validate":"newData.isString()&&newData.val().length<=60"},
+ "role":{".write":"root.child('users/'+auth.uid+'/role').val()=='admin'&&$uid!=root.child('meta/superAdmin').val()",".validate":"newData.val()=='user'||newData.val()=='developer'||(newData.val()=='admin'&&root.child('meta/superAdmin').val()==$uid)"},
+ "status":{".write":"root.child('users/'+auth.uid+'/role').val()=='admin'&&$uid!=root.child('meta/superAdmin').val()",".validate":"newData.val()=='active'||newData.val()=='banned'"}}},
+"devProfiles":{".read":true,"$uid":{".write":"auth.uid==$uid&&root.child('users/'+auth.uid+'/role').val()=='developer'&&root.child('users/'+auth.uid+'/status').val()=='active'",".validate":"newData.hasChildren(['name'])"}},
+"devRequests":{".read":"root.child('users/'+auth.uid+'/role').val()=='admin'",".write":"root.child('users/'+auth.uid+'/role').val()=='admin'","$uid":{".read":"auth.uid==$uid",".write":"auth.uid==$uid&&root.child('users/'+auth.uid+'/role').val()=='user'&&root.child('users/'+auth.uid+'/status').val()=='active'&&(!data.exists()||data.child('status').val()=='rejected')",".validate":"newData.child('status').val()=='pending'||root.child('users/'+auth.uid+'/role').val()=='admin'"}},
+"catalog":{".read":true,".write":"root.child('users/'+auth.uid+'/role').val()=='admin'","$id":{"downloads":{".write":"auth!=null&&root.child('users/'+auth.uid+'/status').val()=='active'&&newData.isNumber()&&newData.val()==data.val()+1"}}},
+"apps":{".read":"root.child('users/'+auth.uid+'/role').val()=='admin'",".write":"root.child('users/'+auth.uid+'/role').val()=='admin'","$uid":{".read":"auth.uid==$uid",".write":"auth.uid==$uid&&root.child('users/'+auth.uid+'/role').val()=='developer'&&root.child('users/'+auth.uid+'/status').val()=='active'","$appId":{".validate":"root.child('users/'+auth.uid+'/role').val()=='admin'||(newData.child('status').val()=='pending'&&newData.child('ownerUid').val()==$uid&&newData.child('apkUrl').val().beginsWith('https://'))"}}},
+"reviews":{".read":true,".write":"root.child('users/'+auth.uid+'/role').val()=='admin'","$appId":{"$uid":{".write":"auth.uid==$uid&&root.child('users/'+auth.uid+'/status').val()=='active'",".validate":"newData.hasChildren(['rating','text','name','ts'])&&newData.child('rating').isNumber()&&newData.child('rating').val()>=1&&newData.child('rating').val()<=5&&newData.child('text').val().length<=1000"}}},
+"favs":{"$uid":{".read":"auth.uid==$uid",".write":"auth.uid==$uid&&root.child('users/'+auth.uid+'/status').val()=='active'"}},
+"history":{"$uid":{".read":"auth.uid==$uid",".write":"auth.uid==$uid&&root.child('users/'+auth.uid+'/status').val()=='active'"}},
+"reports":{".read":"root.child('users/'+auth.uid+'/role').val()=='admin'",".write":"root.child('users/'+auth.uid+'/role').val()=='admin'","$id":{".write":"auth!=null&&root.child('users/'+auth.uid+'/status').val()=='active'&&!data.exists()",".validate":"newData.hasChildren(['appId','reason','by','ts'])&&newData.child('by').val()==auth.uid"}},
+"feedback":{".read":"root.child('users/'+auth.uid+'/role').val()=='admin'",".write":"root.child('users/'+auth.uid+'/role').val()=='admin'","$uid":{".read":"auth.uid==$uid","$id":{
+ ".write":"auth.uid==$uid&&root.child('users/'+auth.uid+'/status').val()=='active'&&!data.exists()",
+ ".validate":"newData.hasChildren(['text','type','name','ts','status'])",
+ "text":{".validate":"newData.isString()&&newData.val().length>=3&&newData.val().length<=1000"},
+ "type":{".validate":"newData.val()=='Bug'||newData.val()=='Idea'||newData.val()=='Praise'||newData.val()=='Other'"},
+ "rating":{".validate":"newData.isNumber()&&newData.val()>=1&&newData.val()<=5"},
+ "name":{".validate":"newData.isString()&&newData.val().length<=60"},
+ "ts":{".validate":"newData.isNumber()"},
+ "status":{".validate":"newData.val()=='open'||(newData.val()=='replied'&&root.child('users/'+auth.uid+'/role').val()=='admin')"},
+ "reply":{".validate":"root.child('users/'+auth.uid+'/role').val()=='admin'&&newData.isString()&&newData.val().length<=1000"},
+ "repliedAt":{".validate":"root.child('users/'+auth.uid+'/role').val()=='admin'&&newData.isNumber()"},
+ "seen":{".write":"auth.uid==$uid",".validate":"newData.isBoolean()"},
+ "$other":{".validate":false}}}},
+"categories":{".read":true,".write":"root.child('users/'+auth.uid+'/role').val()=='admin'"}
+}}</script>
+<script type="text/plain" id="t-st">rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Optional: only needed if developers upload APK files here (images go to ImgBB).
+    // Create-only, so an approved APK can never be overwritten.
+    match /apks/{uid}/{appId}/{file} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && request.auth.uid == uid
+        && file.matches('.*\\.apk')
+        && request.resource.size < 150 * 1024 * 1024
+        && request.resource.contentType in ['application/vnd.android.package-archive','application/octet-stream'];
+    }
+  }
+}</script>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider,signOut,updateProfile} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {getDatabase,ref,get,set,update,push,remove,increment} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+import {getStorage,ref as sref,uploadBytesResumable,getDownloadURL} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
+
+// ===== Paste your Firebase web app config here (Console > Project settings > Your apps) =====
+const CFG={apiKey:"AIzaSyAELJuAqZb62hqGTebfYQfsLgdtsCM2Aa8",authDomain:"wereless-game-6ad76.firebaseapp.com",databaseURL:"https://wereless-game-6ad76-default-rtdb.firebaseio.com",
+projectId:"wereless-game-6ad76",storageBucket:"wereless-game-6ad76.firebasestorage.app",messagingSenderId:"459890246063",appId:"1:459890246063:web:328ca9943fab80b2ef6f5a"};
+const IMGBB_KEY="9b2bfb6033f492d0da89a41861db8e52";
+// ============================================================================================
+const fb=initializeApp(CFG),auth=getAuth(fb),db=getDatabase(fb),st=getStorage(fb);
+const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const val=async p=>(await get(ref(db,p))).val();
+const toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),3000)};
+const fmt=b=>b>1048576?(b/1048576).toFixed(1)+" MB":Math.ceil((b||0)/1024)+" KB",dt=t=>new Date(t).toLocaleDateString();
+const guard=f=>async(...a)=>{try{await f(...a)}catch(e){console.error(e);toast((e.message||"Something went wrong").replace("Firebase: ",""))}};
+const LOGO='<svg viewBox="0 0 40 40" width="34" height="34"><rect width="40" height="40" rx="12" fill="url(#lg)"/><path d="M8 22c2 8 22 8 24 0" stroke="#0A0D08" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M20 9v14m-6-6 6 6 6-6" stroke="#0A0D08" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const DEFCATS=["Games","Tools","Social","Education","Entertainment","Productivity"];
+let me=null,cat={},cats=DEFCATS,S={q:"",c:"",tab:"over",reg:false},E=null,regName="";
+const list=()=>Object.entries(cat).map(([id,a])=>({id,...a}));
+const tile=a=>`<a class="app" href="#/app/${a.id}"><div class="ph"><img src="${esc(a.icon)}" alt="" loading="lazy">${Date.now()-a.updated<6048e5?"<em>NEW</em>":""}</div><b>${esc(a.name)}</b><small>${esc(a.category)}, ${fmt(a.size)}</small></a>`;
+const rank=(a,i)=>`<a class="rk" href="#/app/${a.id}"><span class="n">${i+1}</span><img src="${esc(a.icon)}" alt=""><div class="g"><b>${esc(a.name)}</b><small class="mut">${esc(a.category)} · ${a.downloads||0} downloads</small></div><span class="get">Get</span></a>`;
+const topBars=()=>{const t=list().sort((a,b)=>(b.downloads||0)-(a.downloads||0)).slice(0,5),m=Math.max(1,...t.map(x=>x.downloads||0));return t.length?`<h2>Top apps by downloads</h2>`+t.map(x=>`<div class="bar"><span>${esc(x.name)}</span><div><i style="width:${(x.downloads||0)/m*100}%"></i></div><b>${x.downloads||0}</b></div>`).join(""):""};
+let carT;
+function initCar(){clearInterval(carT);const c=document.querySelector("#car");if(!c)return;const n=c.children.length,d=document.querySelectorAll(".dots i");
+ c.onscroll=()=>{const i=Math.round(c.scrollLeft/c.clientWidth);d.forEach((x,k)=>x.classList.toggle("on",k===i))};
+ if(n>1)carT=setInterval(()=>{c.scrollTo({left:((Math.round(c.scrollLeft/c.clientWidth)+1)%n)*c.clientWidth,behavior:"smooth"})},4500)}
+const SKEL='<div class="sk" style="height:38px;width:55%;margin:6px 0 14px"></div><div class="sk" style="height:220px;border-radius:28px"></div><div class="grid" style="margin-top:16px">'+'<div class="sk" style="height:170px"></div>'.repeat(6)+"</div>";
+addEventListener("keydown",e=>{if(e.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){const q=document.querySelector("#q");if(q){e.preventDefault();q.focus()}}});
+const rowOf=(t,L)=>L.length?`<h2>${t}</h2><div class="hrow">${L.map(tile).join("")}</div>`:"";
+const stars=n=>"★".repeat(Math.round(n))+"☆".repeat(5-Math.round(n));
+const avg=r=>{const v=Object.values(r||{});return v.length?v.reduce((s,x)=>s+x.rating,0)/v.length:0};
+
+async function load(){cat=await val("catalog")||{};const c=await val("categories");if(c)cats=Object.values(c).map(x=>x.name)}
+onAuthStateChanged(auth,async u=>{
+ if(!u){me=null;return route()}
+ try{
+  let r=await val("users/"+u.uid).catch(()=>null);
+  if(!r){ // first sign-in: the first-admin claim is enforced atomically by the database rules
+   try{await set(ref(db,"meta/superAdmin"),u.uid)}catch{} // fails if an admin already exists
+   const adm=(await val("meta/superAdmin").catch(()=>null))===u.uid;
+   await set(ref(db,"users/"+u.uid),{name:regName||u.displayName||(u.email||"user").split("@")[0],email:u.email||"",role:adm?"admin":"user",status:"active",created:Date.now()});
+   r=await val("users/"+u.uid)}
+  if(r.status==="banned"){await signOut(auth);toast("This account is suspended");return}
+  me={uid:u.uid,name:r.name,role:r.role};regName="";
+  await load();route()
+ }catch(e){console.error(e);toast(e.message)}});
+addEventListener("hashchange",route);
+
+const V={};
+async function route(){
+ const [p,a]=location.hash.slice(2).split("/"),nav=$("#nav");
+ if(p==="setup"){nav.className="hide";$("#top").className="hide";return show(await V.setup())}
+ if(!me){nav.className="hide";$("#top").className="hide";return show(V.auth())}
+ const items=[["home","⌂","Home"],["search","⌕","Search"],["lib","♥","Library"],["fb","✎","Feedback"],["me","☺","Profile"]];
+ let un=0;try{un=Object.values(await val("feedback/"+me.uid)||{}).filter(x=>x.reply&&!x.seen).length}catch{}
+ if(me.role==="developer")items.push(["dev","⇪","Developer"]);
+ if(me.role==="admin")items.push(["admin","⚙","Admin"]);
+ const tp=$("#top");tp.className="";tp.innerHTML=`<span class="lg">${LOGO}AppNest</span><span class="sp"></span><button class="ic-btn" onclick="A.theme()" aria-label="Toggle light or dark theme">◐</button><a class="av" href="#/me" aria-label="Profile">${esc((me.name||"?")[0].toUpperCase())}</a>`;
+ nav.className="";nav.innerHTML=`<div class="lg">${LOGO}AppNest</div>`+items.map(i=>`<a href="#/${i[0]}" class="${(p||"home")==i[0]?"on":""}"><i>${i[1]}</i>${i[2]}${i[0]==="fb"&&un?`<span class="dot">${un}</span>`:""}</a>`).join("");
+ clearInterval(carT);const sk=setTimeout(()=>show(SKEL),160);
+ try{const h=await (V[p]||V.home)(a);clearTimeout(sk);show(h)}catch(e){clearTimeout(sk);console.error(e);show(`<div class="card">Could not load this page: ${esc(e.message)}</div>`)}
+}
+const show=h=>{$("#main").innerHTML=h;scrollTo(0,0)};
+
+V.auth=()=>`<section class="auth"><div class="logo">${LOGO}AppNest</div><h1>Discover. Download. Enjoy.</h1><p class="mut" style="margin:8px 0 16px">${S.reg?"Create your account.":"Sign in to browse and download apps."}</p>
+<form onsubmit="A.login(event)">${S.reg?'<input name="name" placeholder="Your name" required>':""}<input name="email" type="email" placeholder="Email" required><input name="pw" type="password" placeholder="Password (6+ characters)" minlength="6" required>
+<button class="btn" style="width:100%;margin-top:8px">${S.reg?"Create account":"Sign in"}</button></form>
+<button class="btn o" style="width:100%;margin-top:8px" onclick="A.google()">Continue with Google</button>
+<p style="margin-top:14px;text-align:center"><a href="#" onclick="A.toggleReg();return false" style="color:var(--blue);font-weight:600">${S.reg?"I already have an account":"Create an account"}</a> &nbsp; <a href="#/setup" class="mut">Setup guide</a></p></section>`;
+
+V.home=async()=>{const L=list(),by=[...L].sort((a,b)=>(b.downloads||0)-(a.downloads||0)),ft=L.filter(a=>a.featured),sl=(ft.length?ft:by).slice(0,5),tr=L.filter(a=>a.trending),dl=L.reduce((x,a)=>x+(a.downloads||0),0);
+ setTimeout(initCar,0);
+ return `<div class="greet"><small class="mut">Welcome back</small><h1>Hi ${esc((me.name||"there").split(" ")[0])}</h1></div>
+ <label class="sbar"><span>⌕</span><input id="q" placeholder="Search apps (press / to focus)" onkeydown="if(event.key=='Enter')A.search(this.value)"></label>`
+ +(sl.length?`<div class="car" id="car">${sl.map(a=>`<a class="slide" href="#/app/${a.id}"><img class="bg" src="${esc(a.icon)}" alt=""><img class="ic" src="${esc(a.icon)}" alt=""><div class="ov"><span class="tag">${ft.length?"Featured":"Popular"}</span><div style="font:700 26px 'Space Grotesk';margin:8px 0 4px">${esc(a.name)}</div><p>${esc((a.description||"").slice(0,90))}</p><span class="btn s">View app</span></div></a>`).join("")}</div><div class="dots">${sl.map((_,i)=>`<i class="${i?"":"on"}"></i>`).join("")}</div>`:"")
+ +`<div class="strip"><span><b>${L.length}</b>apps</span><span><b>${dl}</b>downloads</span><span><b>${cats.length}</b>categories</span></div><div class="chips">${cats.map(c=>`<button class="chip" onclick="A.cat('${esc(c)}')">${esc(c)}</button>`).join("")}</div>`
+ +(by.length?`<h2>Top charts</h2><div class="charts">${by.slice(0,6).map(rank).join("")}</div>`:"")
+ +rowOf("Trending now",tr.length?tr:by.slice(0,10))
+ +(L.length?`<h2>Fresh updates</h2><div class="grid">${[...L].sort((a,b)=>b.updated-a.updated).slice(0,8).map(tile).join("")}</div>`:`<div class="card">No apps are published yet. Developers can submit apps for review.</div>`)};
+V.search=async()=>{const q=S.q.toLowerCase(),so=S.sort||"pop";let L=list().filter(a=>a.name.toLowerCase().includes(q)&&(!S.c||a.category===S.c));
+ L.sort(so==="new"?(a,b)=>b.updated-a.updated:so==="az"?(a,b)=>a.name.localeCompare(b.name):(a,b)=>(b.downloads||0)-(a.downloads||0));
+ return `<label class="sbar"><span>⌕</span><input id="q" value="${esc(S.q)}" placeholder="Search apps by name" onkeydown="if(event.key=='Enter')A.search(this.value)"></label>
+ <div class="chips"><button class="chip ${S.c?"":"on"}" onclick="A.cat('')">All</button>${cats.map(c=>`<button class="chip ${S.c===c?"on":""}" onclick="A.cat('${esc(c)}')">${esc(c)}</button>`).join("")}</div>
+ <div class="chips">${[["pop","Popular"],["new","Newest"],["az","A to Z"]].map(([k,t])=>`<button class="chip ${so===k?"on":""}" onclick="A.sort('${k}')">${t}</button>`).join("")}</div>
+ <p class="mut" style="margin:2px 0 10px">${L.length} ${L.length===1?"app":"apps"}</p><div class="grid">${L.map(tile).join("")||'<p class="mut">No apps match. Try another name or category.</p>'}</div>`};
+V.app=async id=>{const a=cat[id];if(!a)return `<div class="card">This app is not available.</div>`;
+ const rv=await val("reviews/"+id)||{},fav=await val(`favs/${me.uid}/${id}`),r=avg(rv),mine=rv[me.uid];
+ return `<div class="hd"><img src="${esc(a.icon)}" alt=""><div><h1 style="font-size:24px">${esc(a.name)}</h1><div class="mut">${esc(a.devName)}</div><div style="color:var(--vio)">${stars(r)} <span class="mut">${r?r.toFixed(1):"No ratings"} (${Object.keys(rv).length})</span></div></div></div>
+ <div class="stats" style="margin:14px 0"><div><b>${esc(a.version)}</b>Version</div><div><b>${fmt(a.size)}</b>Size</div><div><b>${a.downloads||0}</b>Downloads</div><div><b>${dt(a.updated)}</b>Updated</div></div>
+ <button class="btn" onclick="A.dl('${id}')">Download APK</button> <button class="btn o" onclick="A.fav('${id}',${!!fav})">${fav?"Remove favourite":"Add to favourites"}</button> <button class="btn o" onclick="A.share('${id}')">Share</button> <button class="btn r" onclick="A.report('${id}')">Report</button>
+ <progress id="pg" value="0" max="100" hidden style="margin-top:12px"></progress>
+ <div class="shots">${(a.screenshots||[]).map(s=>`<img src="${esc(s)}" alt="Screenshot" loading="lazy">`).join("")}</div>
+ <h2>About</h2><p style="white-space:pre-wrap">${esc(a.description)}</p>${a.changelog?`<h2>What's new</h2><p style="white-space:pre-wrap">${esc(a.changelog)}</p>`:""}
+ <h2>Ratings and reviews</h2><div class="card"><select id="rt">${[5,4,3,2,1].map(n=>`<option ${mine&&mine.rating==n?"selected":""}>${n}</option>`).join("")}</select><textarea id="rx" maxlength="1000" placeholder="Write a review">${esc(mine?.text||"")}</textarea><button class="btn" onclick="A.review('${id}')">${mine?"Update review":"Post review"}</button></div>
+ ${Object.values(rv).sort((x,y)=>y.ts-x.ts).map(x=>`<div class="it"><div class="g"><b>${esc(x.name)}</b> <span style="color:var(--vio)">${stars(x.rating)}</span><br>${esc(x.text)}</div><span class="mut">${dt(x.ts)}</span></div>`).join("")}${rowOf("More from "+esc(a.devName),list().filter(x=>x.ownerUid===a.ownerUid&&x.id!==id))}${rowOf("You might also like",list().filter(x=>x.category===a.category&&x.id!==id).slice(0,8))}`};
+V.lib=async()=>{const f=Object.keys(await val("favs/"+me.uid)||{}).filter(i=>cat[i]).map(i=>({id:i,...cat[i]})),h=Object.values(await val("history/"+me.uid)||{}).sort((a,b)=>b.ts-a.ts);
+ return `<h2>Favourites</h2><div class="grid">${f.map(tile).join("")||'<p class="mut">Tap "Add to favourites" on any app to save it here.</p>'}</div><h2>Download history</h2>${h.map(x=>`<a class="it" href="#/app/${x.appId}"><img src="${esc(x.icon)}" alt=""><div class="g"><b>${esc(x.name)}</b><br><small class="mut">Version ${esc(x.version)}</small></div><span class="mut">${dt(x.ts)}</span></a>`).join("")||'<p class="mut">No downloads yet.</p>'}`};
+V.me=async()=>{const rq=me.role==="user"?await val("devRequests/"+me.uid):null;
+ return `<h2>Profile</h2><div class="card"><input id="pn" value="${esc(me.name)}" placeholder="Display name"><p class="mut" style="margin:6px 0 10px">${esc(auth.currentUser.email)} · Role: ${esc(me.role)}</p><button class="btn" onclick="A.saveName()">Save changes</button> <button class="btn o" onclick="A.out()">Sign out</button></div>
+ ${me.role==="user"?`<h2>Become a developer</h2><div class="card">${rq&&rq.status==="pending"?'<p>Your request is pending review by the admin.</p>':rq&&rq.status==="approved"?"<p>Approved. Reload the page to unlock the developer panel.</p>":`${rq?'<p class="mut">Your last request was rejected. You can send a new one.</p>':""}<input id="dc" placeholder="Studio or company name"><textarea id="dn" placeholder="What do you plan to publish?"></textarea><button class="btn" onclick="A.reqDev()">Request developer access</button>`}</div>`:""}`};
+
+const fbThread=(x,adm)=>{const nw=!adm&&x.reply&&!x.seen;return `<div class="thread"><div class="tmeta"><span class="badge">${esc(x.type)}</span>${x.rating?`<span style="color:#F5B301">${"★".repeat(x.rating)}</span>`:""}<span class="pill ${nw?"new":x.status}">${nw?"New reply":x.status==="open"?"Awaiting reply":"Replied"}</span><small class="mut">${dt(x.ts)}</small></div><div class="bub me">${esc(x.text)}</div>${x.reply?`<div class="bub tm"><div class="who">${LOGO}AppNest Team<small>${dt(x.repliedAt)}</small></div>${esc(x.reply)}</div>`:adm?"":'<div class="wait">We usually reply right here, soon.</div>'}</div>`};
+V.fb=async()=>{const o=await val("feedback/"+me.uid)||{},L=Object.entries(o).map(([id,x])=>({id,...x})).sort((a,b)=>b.ts-a.ts),nw=L.filter(x=>x.reply&&!x.seen);
+ if(nw.length){update(ref(db),Object.fromEntries(nw.map(x=>[`feedback/${me.uid}/${x.id}/seen`,true]))).catch(()=>{});document.querySelector("nav .dot")?.remove()}
+ S.ft="Idea";S.fr=0;
+ return `<div class="fbh"><h1>Your voice shapes AppNest</h1><p>Found a bug, got an idea, or just want to say hi? Tell us. Our team replies right here.</p></div>
+ <div class="fbc"><b>What kind of feedback?</b><div class="types">${["Idea","Bug","Praise","Other"].map(t=>`<button class="chip ft ${t==="Idea"?"on":""}" onclick="A.ftype('${t}',this)">${t}</button>`).join("")}</div>
+ <b>How is your experience?</b> <span class="mut">(optional)</span><div class="starrow">${[1,2,3,4,5].map(n=>`<button class="star" aria-label="${n} stars" onclick="A.frate(${n})">★</button>`).join("")}</div>
+ <textarea id="fbt" maxlength="1000" placeholder="Write your feedback..." oninput="A.count(this)"></textarea>
+ <div style="display:flex;align-items:center;gap:12px;margin-top:6px"><button class="btn" onclick="A.fbSend()">Send feedback</button><small class="mut" id="fc">0 / 1000</small></div></div>
+ <h2>Your conversations</h2>${L.map(x=>fbThread(x,false)).join("")||'<div class="card" style="text-align:center"><b>Nothing yet</b><p class="mut">Your feedback and our replies will show up here.</p></div>'}`};
+V.dev=async()=>{
+ if(me.role!=="developer")return `<div class="card">Developer access is required. Request it from your profile.</div>`;
+ const mine=await val("apps/"+me.uid)||{},pf=await val("devProfiles/"+me.uid)||{},e=(E&&mine[E])||{},ids=Object.keys(mine);
+ const rv=await Promise.all(ids.map(i=>val("reviews/"+i)));
+ return `<h2>Developer profile</h2><div class="card"><input id="dpn" placeholder="Developer name" value="${esc(pf.name||"")}"><input id="dpw" placeholder="Website (optional)" value="${esc(pf.site||"")}"><textarea id="dpb" placeholder="About you">${esc(pf.bio||"")}</textarea><button class="btn" onclick="A.saveProf()">Save profile</button></div>
+ <h2>My apps</h2>${ids.map((i,k)=>{const a=mine[i];return `<div class="it"><img src="${esc(a.icon)}" alt=""><div class="g"><b>${esc(a.name)}</b> <span class="badge ${a.status}">${a.status}</span><br><small class="mut">v${esc(a.version)} · ${cat[i]?.downloads||0} downloads · ${avg(rv[k])?avg(rv[k]).toFixed(1)+" ★ ("+Object.keys(rv[k]||{}).length+" reviews)":"no ratings"}${a.reviewNote?" · Note: "+esc(a.reviewNote):""}</small></div>
+ <a class="btn o s" href="#/app/${i}">View</a><button class="btn o s" onclick="A.edit('${i}')">Edit or update</button><button class="btn r s" onclick="A.delApp('${i}')">Delete</button></div>`}).join("")||'<p class="mut">You have not submitted any apps yet.</p>'}
+ <h2>${E?"Edit app or upload a new version":"Submit a new app"}</h2><form class="card" id="af" onsubmit="A.save(event)">
+ <input name="name" placeholder="App name" required maxlength="60" value="${esc(e.name||"")}"><select name="cat">${cats.map(c=>`<option ${e.category===c?"selected":""}>${esc(c)}</option>`).join("")}</select>
+ <textarea name="desc" placeholder="Description" required maxlength="4000">${esc(e.description||"")}</textarea>
+ <input name="ver" placeholder="Version name (e.g. 1.2.0)" required value="${esc(e.version||"")}"><input name="vc" type="number" min="1" placeholder="Version code (integer, must increase)" required value="${e.versionCode||""}">
+ <textarea name="log" placeholder="Changelog">${esc(e.changelog||"")}</textarea>
+ <label class="mut">APK file ${E?"(only to upload a new version)":""}</label><input name="apk" type="file" accept=".apk,application/vnd.android.package-archive"><label class="mut">Or paste a direct https link to the APK, and its size</label><input name="link" type="url" placeholder="https://example.com/app.apk"><input name="mb" type="number" step="0.1" min="0.1" placeholder="Size in MB (for links)">
+ <label class="mut">Icon (PNG, JPG or WebP, max 5 MB, hosted on ImgBB) ${E?"(optional)":""}</label><input name="icon" type="file" accept="image/png,image/jpeg,image/webp">
+ <label class="mut">Screenshots (up to 6) ${E?"(optional, replaces existing)":""}</label><input name="shots" type="file" accept="image/png,image/jpeg,image/webp" multiple>
+ <p class="mut" style="margin:8px 0">Every submission or update waits for admin approval before it goes live.</p><p id="fst" class="mut" style="margin:6px 0">Ready (build 3)</p><progress id="up" value="0" max="100" hidden></progress>
+ <button class="btn" id="sv">${E?"Save and resubmit":"Submit for review"}</button>${E?' <button type="button" class="btn o" onclick="A.edit(null)">Cancel</button>':""}</form>`};
+
+V.admin=async()=>{
+ if(me.role!=="admin")return `<div class="card">Only the Super Admin can open this panel.</div>`;
+ const T=[["over","Overview"],["apps","Apps"],["users","People"],["rep","Reports"],["rev","Reviews"],["fb","Feedback"],["cats","Categories"]];let b="";
+ const flat=async()=>{const o=await val("apps")||{};return Object.entries(o).flatMap(([u,x])=>Object.entries(x).map(([id,a])=>({u,id,...a})))};
+ if(S.tab==="over"){const us=await val("users")||{},ap=await flat(),UL=Object.values(us),dl=Object.values(cat).reduce((s,a)=>s+(a.downloads||0),0);
+  b=`<div class="stats"><div><b>${UL.length}</b>Users</div><div><b>${UL.filter(x=>x.role==="developer").length}</b>Developers</div><div><b>${ap.length}</b>Apps</div><div><b>${ap.filter(a=>a.status==="pending").length}</b>Pending</div><div><b>${dl}</b>Downloads</div></div>${topBars()}<h2>Recent activity</h2>`+
+  [...ap].sort((x,y)=>y.updated-x.updated).slice(0,8).map(a=>`<div class="it"><div class="g"><b>${esc(a.name)}</b> v${esc(a.version)} by ${esc(a.devName)}</div><span class="badge ${a.status}">${a.status}</span><span class="mut">${dt(a.updated)}</span></div>`).join("")}
+ if(S.tab==="apps"){b=(await flat()).sort((x,y)=>(x.status==="pending"?0:1)-(y.status==="pending"?0:1)).map(a=>{const c=cat[a.id];return `<div class="it"><img src="${esc(a.icon)}" alt=""><div class="g"><b>${esc(a.name)}</b> <span class="badge ${a.status}">${a.status}</span><br><small class="mut">v${esc(a.version)} by ${esc(a.devName)}, ${fmt(a.size)}</small></div>
+  <button class="btn s" onclick="A.pub('${a.u}','${a.id}')">${a.status==="published"?"Publish update":"Approve and publish"}</button>
+  ${c?`<button class="btn o s" onclick="A.unpub('${a.u}','${a.id}')">Unpublish</button><button class="btn o s" onclick="A.flag('${a.id}','featured',${!!c.featured})">${c.featured?"Unfeature":"Feature"}</button><button class="btn o s" onclick="A.flag('${a.id}','trending',${!!c.trending})">${c.trending?"Untrend":"Trending"}</button>`:`<button class="btn o s" onclick="A.reject('${a.u}','${a.id}')">Reject</button>`}
+  <button class="btn r s" onclick="A.rm('${a.u}','${a.id}')">Remove</button></div>`}).join("")||'<p class="mut">No submissions yet.</p>'}
+ if(S.tab==="users"){const rq=Object.entries(await val("devRequests")||{}).filter(([,r])=>r.status==="pending"),us=Object.entries(await val("users")||{});
+  b=(rq.length?`<h2>Developer requests</h2>`+rq.map(([u,r])=>`<div class="it"><div class="g"><b>${esc(r.name)}</b> (${esc(r.company)})<br><small class="mut">${esc(r.note)}</small></div><button class="btn s" onclick="A.devOk('${u}')">Approve</button><button class="btn r s" onclick="A.devNo('${u}')">Reject</button></div>`).join(""):"")+`<h2>All accounts</h2><input id="us" type="search" value="${esc(S.uq||"")}" placeholder="Search users by name, email or role" oninput="A.usrFilter(this.value)" autocomplete="off"><p class="mut" id="uc" style="margin:4px 0"></p><div id="ul">`+
+  us.map(([u,x])=>`<div class="it u" data-q="${esc(((x.name||"")+" "+(x.email||"")+" "+x.role+" "+x.status).toLowerCase())}" ${S.uq&&!((x.name||"")+" "+(x.email||"")+" "+x.role+" "+x.status).toLowerCase().includes(S.uq.toLowerCase())?"hidden":""}><div class="g"><b>${esc(x.name)}</b> <span class="badge">${x.role}</span> <span class="badge ${x.status}">${x.status}</span><br><small class="mut">${esc(x.email)}</small></div>${x.role==="admin"?'<small class="mut">Super Admin</small>':`<button class="btn o s" onclick="A.role('${u}','${x.role==="developer"?"user":"developer"}')">${x.role==="developer"?"Revoke developer":"Make developer"}</button><button class="btn ${x.status==="banned"?"o":"r"} s" onclick="A.ban('${u}','${x.status==="banned"?"unban":"ban"}')">${x.status==="banned"?"Restore":"Suspend"}</button>`}</div>`).join("")+`</div><p class="mut" id="ue" hidden>No users match your search.</p>`;setTimeout(()=>A.usrFilter(S.uq||""),0)}
+ if(S.tab==="rep"){b=Object.entries(await val("reports")||{}).map(([id,r])=>`<div class="it"><div class="g"><b>${esc(r.name||r.appId)}</b><br>${esc(r.reason)}<br><small class="mut">${dt(r.ts)}</small></div><a class="btn o s" href="#/app/${r.appId}">Open</a><button class="btn o s" onclick="A.dismiss('${id}')">Dismiss</button></div>`).join("")||'<p class="mut">No reports.</p>'}
+ if(S.tab==="rev"){const R=await val("reviews")||{};b=Object.entries(R).flatMap(([a,o])=>Object.entries(o).map(([u,x])=>`<div class="it"><div class="g"><b>${esc(cat[a]?.name||a)}</b> ${stars(x.rating)}<br>${esc(x.text)} <small class="mut">by ${esc(x.name)}</small></div><button class="btn r s" onclick="A.delRev('${a}','${u}')">Delete</button></div>`)).join("")||'<p class="mut">No reviews.</p>'}
+ if(S.tab==="fb"){const o=await val("feedback")||{},L=Object.entries(o).flatMap(([u,x])=>Object.entries(x).map(([id,f])=>({u,id,...f}))).sort((a,b)=>(a.status==="open"?0:1)-(b.status==="open"?0:1)||b.ts-a.ts);
+  b=`<p class="mut">${L.filter(f=>f.status==="open").length} awaiting reply</p>`+(L.map(f=>`<div style="margin:16px 0"><b>${esc(f.name)}</b>${fbThread(f,true)}<textarea id="r_${f.id}" maxlength="1000" placeholder="Write a reply...">${esc(f.reply||"")}</textarea><button class="btn s" onclick="A.reply('${f.u}','${f.id}')">${f.reply?"Update reply":"Send reply"}</button> <button class="btn r s" onclick="A.delFb('${f.u}','${f.id}')">Delete</button></div>`).join("")||'<p class="mut">No feedback yet.</p>')}
+ if(S.tab==="cats"){const C=Object.entries(await val("categories")||{});b=`<div class="card"><input id="nc" placeholder="New category name" maxlength="30"><button class="btn" onclick="A.addCat()">Add category</button></div>`+C.map(([k,c])=>`<div class="it"><div class="g">${esc(c.name)}</div><button class="btn r s" onclick="A.delCat('${k}')">Delete</button></div>`).join("")+(C.length?"":'<p class="mut">Using the default categories. Add your own to replace them.</p>')}
+ return `<h2 style="margin-top:0">Admin</h2><div class="tabs">${T.map(t=>`<button class="chip ${S.tab===t[0]?"on":""}" onclick="A.tab('${t[0]}')">${t[1]}</button>`).join("")}</div>${b}`};
+
+V.setup=async()=>{const code=(id,t,f)=>`<h2>${t}</h2><p class="mut">Save as <b>${f}</b></p><button class="btn o s" onclick="A.copy('${id}')">Copy</button><pre id="${id}">${esc($("#t-"+id.slice(2)).textContent)}</pre>`;
+ return `<div class="logo">${LOGO}AppNest setup</div><div class="card"><h2 style="margin-top:0">Free setup, no Cloud Functions</h2><ol style="padding-left:20px;line-height:1.8">
+ <li>Firebase console, project <b>wereless-game-6ad76</b>: enable <b>Authentication</b> (Email/Password and Google) and <b>Realtime Database</b>. Storage is optional (see step 5).</li>
+ <li>Icons and screenshots are hosted on ImgBB (the key is set in <code>IMGBB_KEY</code> near the top of the script).</li>
+ <li>The Firebase config in <code>CFG</code> is already filled in for this project.</li>
+ <li>Realtime Database, Rules tab: paste the database rules below and publish.</li>
+ <li>APK files: developers either paste a direct https link (GitHub Releases, Cloudinary, your own host) or, if your project has Storage enabled, upload the file. If you use Storage, paste the storage rules below in its Rules tab.</li>
+ <li>Host the file for free: <code>firebase init hosting</code>, put this file in <code>public/index.html</code>, run <code>firebase deploy --only hosting</code>. Add your domain under Authentication, Settings, Authorized domains.</li>
+ <li><b>Admin initialization:</b> open the site and register right away. The first account to write <code>meta/superAdmin</code> wins; the database rules only allow that write once, so two simultaneous sign-ups cannot both become admin. Everyone after is a normal user. If a stray account registered first, delete the <code>users</code> and <code>meta</code> nodes and the Auth users, then register again.</li></ol></div>
+ <div class="card"><h2 style="margin-top:0">Database structure</h2><pre>meta/superAdmin            uid, write-once
+users/{uid}                name, email, role (admin|developer|user), status (active|banned), created
+devProfiles/{uid}          name, site, bio
+devRequests/{uid}          name, company, note, status
+apps/{ownerUid}/{appId}    private record: name, category, description, version, versionCode,
+                           changelog, apkUrl, size, icon, screenshots[], status, reviewNote
+catalog/{appId}            public published copy + downloads, featured, trending
+reviews/{appId}/{uid}      rating, text, name, ts
+favs/{uid}/{appId}         true
+history/{uid}/{pushId}     appId, name, icon, version, ts
+reports/{id}               appId, name, reason, by, ts
+feedback/{uid}/{id}        text, type, rating, name, ts, status, reply, repliedAt, seen
+categories/{id}            name</pre></div>
+ ${code("t-db","Realtime Database rules","database.rules.json")}${code("t-st","Storage rules (optional)","storage.rules")}
+ <p style="margin:16px 0"><a class="btn" href="#/">Back to AppNest</a></p>`};
+
+const up=(file,path,type,bar)=>new Promise((ok,no)=>{const r=sref(st,path),t=uploadBytesResumable(r,file,{contentType:type||file.type});let g;
+ const arm=()=>{clearTimeout(g);g=setTimeout(()=>{t.cancel();no(Error("timeout"))},20000)};arm();
+ t.on("state_changed",x=>{arm();bar.hidden=false;bar.value=x.bytesTransferred/x.totalBytes*100},e=>{clearTimeout(g);no(e)},()=>{clearTimeout(g);ok(r)})});
+const T=(p,ms,m)=>Promise.race([p,new Promise((_,no)=>setTimeout(()=>no(Error(m)),ms))]);
+const say=(m,bad)=>{const e=$("#fst");if(e){e.style.color=bad?"#FF8A9E":"";e.textContent=m}};
+const shrink=async(f,m)=>{try{const b=await createImageBitmap(f),k=Math.min(1,m/Math.max(b.width,b.height)),c=document.createElement("canvas");c.width=Math.round(b.width*k);c.height=Math.round(b.height*k);
+ const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(b,0,0,c.width,c.height);return await new Promise(r=>c.toBlob(r,"image/jpeg",.85))||f}catch{return f}};
+const imgbb=async(f,m)=>{if(IMGBB_KEY.startsWith("PASTE"))throw Error("Add your ImgBB API key (IMGBB_KEY) in the script");
+ if(!/^image\/(png|jpeg|webp)$/.test(f.type)||f.size>10485760)throw Error("Images must be PNG, JPG or WebP under 10 MB");
+ const d=new FormData();d.append("image",await shrink(f,m),"image.jpg");const ac=new AbortController(),t=setTimeout(()=>ac.abort(),45000);
+ try{const j=await(await fetch("https://api.imgbb.com/1/upload?key="+IMGBB_KEY,{method:"POST",body:d,signal:ac.signal})).json();
+  if(!j.success)throw Error(j.error?.message||"ImgBB rejected the image");return j.data.url}
+ catch(x){throw Error(x.name==="AbortError"?"ImgBB did not respond within 45 seconds. Check your connection and API key.":x.message==="Failed to fetch"?"Could not reach ImgBB. Check your connection or any ad blocker.":x.message)}
+ finally{clearTimeout(t)}};
+const A=window.A={
+ ftype(t,el){S.ft=t;document.querySelectorAll(".ft").forEach(b=>b.classList.toggle("on",b===el))},
+ frate(n){S.fr=S.fr===n?0:n;document.querySelectorAll(".star").forEach((e,i)=>e.classList.toggle("on",i<S.fr))},
+ count(el){document.querySelector("#fc").textContent=el.value.length+" / 1000"},
+ fbSend:guard(async()=>{const t=document.querySelector("#fbt").value.trim();if(t.length<3)throw Error("Please write a little more");
+  await push(ref(db,"feedback/"+me.uid),{text:t,type:S.ft,name:me.name,ts:Date.now(),status:"open",...(S.fr?{rating:S.fr}:{})});toast("Thanks! We will reply here.");route()}),
+ reply:guard(async(u,id)=>{const t=document.querySelector("#r_"+id).value.trim();if(!t)throw Error("Write a reply first");
+  await update(ref(db),{[`feedback/${u}/${id}/reply`]:t.slice(0,1000),[`feedback/${u}/${id}/status`]:"replied",[`feedback/${u}/${id}/repliedAt`]:Date.now(),[`feedback/${u}/${id}/seen`]:false});toast("Reply sent");route()}),
+ delFb:guard(async(u,id)=>{if(!confirm("Delete this feedback?"))return;await remove(ref(db,`feedback/${u}/${id}`));route()}),
+ usrFilter(v){S.uq=v;const q=v.trim().toLowerCase();let n=0,t=0;document.querySelectorAll("#ul .u").forEach(e=>{t++;const m=!q||e.dataset.q.includes(q);e.hidden=!m;if(m)n++});
+  const c=document.querySelector("#uc"),e=document.querySelector("#ue");if(c)c.textContent=q?`${n} of ${t} accounts`:`${t} accounts`;if(e)e.hidden=n>0||!q},
+ theme(){const r=document.documentElement,n=r.dataset.theme==="light"?"dark":"light";r.dataset.theme=n;try{localStorage.theme=n}catch{}},
+ share:guard(async id=>{const a=cat[id],u=location.href.split("#")[0]+"#/app/"+id;if(navigator.share){try{await navigator.share({title:a.name,text:"Get "+a.name+" on AppNest",url:u})}catch{}}else{await navigator.clipboard.writeText(u);toast("Link copied")}}),
+ sort(k){S.sort=k;route()},
+ toggleReg(){S.reg=!S.reg;route()},
+ login:guard(async e=>{e.preventDefault();const f=e.target;
+  if(S.reg){regName=f.name.value.trim();const c=await createUserWithEmailAndPassword(auth,f.email.value,f.pw.value);await updateProfile(c.user,{displayName:regName})}
+  else await signInWithEmailAndPassword(auth,f.email.value,f.pw.value)}),
+ google:guard(()=>signInWithPopup(auth,new GoogleAuthProvider())),
+ out:()=>signOut(auth).then(()=>{location.hash="#/"}),
+ search(q){S.q=q;location.hash="#/search";route()},cat(c){S.c=c;location.hash="#/search";route()},
+ tab(t){S.tab=t;route()},
+ copy:guard(async id=>{await navigator.clipboard.writeText($("#"+id).textContent);toast("Copied")}),
+ saveName:guard(async()=>{const n=$("#pn").value.trim();if(!n)return;await updateProfile(auth.currentUser,{displayName:n});await set(ref(db,`users/${me.uid}/name`),n);me.name=n;toast("Saved")}),
+ reqDev:guard(async()=>{await set(ref(db,"devRequests/"+me.uid),{name:me.name,company:$("#dc").value.trim()||"-",note:$("#dn").value.trim()||"-",status:"pending",ts:Date.now()});toast("Request sent");route()}),
+ fav:guard(async(id,on)=>{await (on?remove:set)(ref(db,`favs/${me.uid}/${id}`),...(on?[]:[true]));route()}),
+ report:guard(async id=>{const r=prompt("What is wrong with this app?");if(!r)return;await push(ref(db,"reports"),{appId:id,name:cat[id].name,reason:r.slice(0,500),by:me.uid,ts:Date.now()});toast("Report sent")}),
+ review:guard(async id=>{await set(ref(db,`reviews/${id}/${me.uid}`),{rating:+$("#rt").value,text:$("#rx").value.trim().slice(0,1000),name:me.name,ts:Date.now()});toast("Review saved");route()}),
+ dl:guard(async id=>{const a=cat[id],bar=$("#pg");if(!a.apkUrl)throw Error("No download available");
+  await update(ref(db),{[`catalog/${id}/downloads`]:increment(1)}).catch(()=>{});
+  push(ref(db,"history/"+me.uid),{appId:id,name:a.name,icon:a.icon,version:a.version,ts:Date.now()}).catch(()=>{});bar.hidden=false;
+  try{const r=await fetch(a.apkUrl),L=+r.headers.get("content-length")||a.size,rd=r.body.getReader(),ch=[];let n=0;
+   for(;;){const {done,value}=await rd.read();if(done)break;ch.push(value);n+=value.length;bar.value=n/L*100}
+   const l=document.createElement("a");l.href=URL.createObjectURL(new Blob(ch,{type:"application/vnd.android.package-archive"}));l.download=a.name.replace(/\W+/g,"_")+"_"+a.version+".apk";l.click();toast("Download complete")}
+  catch{location.href=a.apkUrl}}),
+ saveProf:guard(async()=>{const n=$("#dpn").value.trim();if(!n)return toast("Enter a developer name");await set(ref(db,"devProfiles/"+me.uid),{name:n,site:$("#dpw").value.trim(),bio:$("#dpb").value.trim()});toast("Profile saved")}),
+ edit(i){E=i;route()},
+ delApp:guard(async i=>{if(!confirm("Delete this app? Published copies are removed by the admin."))return;await remove(ref(db,`apps/${me.uid}/${i}`));route()}),
+ save:guard(async e=>{e.preventDefault();const f=e.target,bar=$("#up"),btn=$("#sv");btn.disabled=true;
+  try{say("Checking...");const NE="Cannot reach the database. Check CFG.databaseURL (region) and your connection.";const old=E?await T(val(`apps/${me.uid}/${E}`),12000,NE):{},pf=await T(val("devProfiles/"+me.uid),12000,NE);
+   if(!pf)throw Error("Save your developer profile first");
+   say("Checking...");const id=E||push(ref(db,"apps/"+me.uid)).key,vc=Math.floor(+f.vc.value),apk=f.apk.files[0],link=f.link.value.trim(),ic=f.icon.files[0],sh=[...f.shots.files].slice(0,6);
+   if(!E&&!(apk||link))throw Error("Add an APK file or a direct APK link");
+   if(!E&&!ic)throw Error("New apps need an icon");
+   const rec={...old,name:f.name.value.trim(),category:f.cat.value,description:f.desc.value.trim(),version:f.ver.value.trim(),versionCode:vc,changelog:f.log.value.trim(),status:"pending",ownerUid:me.uid,devName:pf.name,updated:Date.now()};delete rec.reviewNote;
+   if(apk||link){if(old.versionCode&&vc<=old.versionCode)throw Error("Version code must be higher than "+old.versionCode)}
+   else if(E&&vc!==old.versionCode)throw Error("Add a new APK or link to change the version code");
+   if(apk){say("Uploading APK...");
+    if(!/\.apk$/i.test(apk.name))throw Error("The file must have an .apk extension");
+    if(apk.size>150*1048576||apk.size<10240)throw Error("APK must be between 10 KB and 150 MB");
+    const h=new Uint8Array(await apk.slice(0,4).arrayBuffer());if(h[0]!==0x50||h[1]!==0x4B)throw Error("This file is not a valid APK (zip) archive");
+    try{rec.apkUrl=await getDownloadURL(await up(apk,`apks/${me.uid}/${id}/${vc}.apk`,"application/vnd.android.package-archive",bar))}
+    catch(x){throw Error("APK upload failed ("+(x.code||x.message)+"). Storage may not be enabled on your plan: paste a direct APK link instead.")}
+    rec.size=apk.size}
+   else if(link){if(!/^https:\/\//i.test(link))throw Error("The APK link must start with https://");const mb=+f.mb.value;if(!(mb>0))throw Error("Enter the APK size in MB");rec.apkUrl=link;rec.size=Math.round(mb*1048576)}
+   bar.hidden=false;bar.removeAttribute("value");say("Uploading images to ImgBB...");
+   if(ic){say("Uploading icon...");rec.icon=await imgbb(ic,512)}
+   if(sh.length){rec.screenshots=[];for(const [i,x] of sh.entries()){say(`Uploading screenshot ${i+1} of ${sh.length}...`);rec.screenshots.push(await imgbb(x,1280))}}
+   say("Saving...");
+   try{await T(set(ref(db,`apps/${me.uid}/${id}`),rec),20000,"The save did not reach the database within 20 seconds. Check CFG.databaseURL (region) and your connection.")}catch(x){throw Error(x.code||/PERMISSION/i.test(x.message)?"Database refused the save ("+(x.code||x.message)+"). Publish the latest database rules and check your account is an approved developer.":x.message)}
+   E=null;toast("Submitted for review");route()}
+  catch(x){say(x.message,true);throw x}
+  finally{btn.disabled=false;const b=$("#up");if(b)b.hidden=true}}),
+ pub:guard(async(u,id)=>{const r=await val(`apps/${u}/${id}`),p={};
+  for(const k of ["name","category","description","icon","screenshots","version","versionCode","size","changelog","devName","ownerUid","updated","apkUrl"])p[`catalog/${id}/${k}`]=r[k]??null;
+  if(cat[id]?.downloads==null)p[`catalog/${id}/downloads`]=0;p[`apps/${u}/${id}/status`]="published";p[`apps/${u}/${id}/reviewNote`]=null;
+  await update(ref(db),p);await load();toast("Published");route()}),
+ unpub:guard(async(u,id)=>{await update(ref(db),{[`catalog/${id}`]:null,[`apps/${u}/${id}/status`]:"unpublished"});await load();route()}),
+ reject:guard(async(u,id)=>{const n=prompt("Reason for rejection (shown to the developer)");if(n===null)return;await update(ref(db),{[`apps/${u}/${id}/status`]:"rejected",[`apps/${u}/${id}/reviewNote`]:n.slice(0,300)});route()}),
+ flag:guard(async(id,k,on)=>{await set(ref(db,`catalog/${id}/${k}`),!on);await load();route()}),
+ rm:guard(async(u,id)=>{if(!confirm("Remove this app permanently? Files already uploaded to ImgBB or Storage are not deleted."))return;await update(ref(db),{[`apps/${u}/${id}`]:null,[`catalog/${id}`]:null,[`reviews/${id}`]:null});await load();route()}),
+ devOk:guard(async u=>{await update(ref(db),{[`users/${u}/role`]:"developer",[`devRequests/${u}/status`]:"approved"});route()}),
+ devNo:guard(async u=>{await set(ref(db,`devRequests/${u}/status`),"rejected");route()}),
+ role:guard(async(u,role)=>{await set(ref(db,`users/${u}/role`),role);route()}),
+ ban:guard(async(u,action)=>{if(!confirm(action==="ban"?"Suspend this account?":"Restore this account?"))return;await set(ref(db,`users/${u}/status`),action==="ban"?"banned":"active");route()}),
+ dismiss:guard(async id=>{await remove(ref(db,"reports/"+id));route()}),
+ delRev:guard(async(a,u)=>{await remove(ref(db,`reviews/${a}/${u}`));route()}),
+ addCat:guard(async()=>{const n=$("#nc").value.trim();if(!n)return;const C=await val("categories");if(!C)for(const c of DEFCATS)await push(ref(db,"categories"),{name:c});await push(ref(db,"categories"),{name:n});await load();route()}),
+ delCat:guard(async k=>{await remove(ref(db,"categories/"+k));await load();route()})
+};
+</script></body></html>
